@@ -5,7 +5,6 @@ echo Start Redis
 sleep 1
 
 cd /app
-rm -f /tmp/logs
 python3 -u -m saq worker.settings &
 python3 -u -m saq worker.settings &
 python3 -u -m saq worker.settings &
@@ -16,4 +15,4 @@ python3 -u ./client.py --stop &
 python3 -u ./client.py &
 python3 -u ./client.py &
 
-sleep 120
+sleep 600

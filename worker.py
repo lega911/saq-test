@@ -11,7 +11,7 @@ queue = Queue.from_url('redis://localhost')
 
 async def rpc(ctx, *, d):
     print(f'  Worker #{pid}: request {d["id"]} ({d})')
-    await asyncio.sleep(random.random() * 0.5)
+    await asyncio.sleep(random.random() + 1)
     r = d['a'] + d['b']
     print(f'  Worker #{pid} response {d["id"]} ({r})')
     return {'id': d['id'], 'result': r, 'pid': pid}
@@ -22,5 +22,7 @@ print(f'Worker #{pid} has started')
 
 settings = {
     "queue":     queue,
-    "functions": [rpc]
+    "functions": [rpc],
+    "timers": {"sweep": 1},
+    "concurrency": 20
 }
